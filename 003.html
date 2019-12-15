@@ -1,0 +1,57 @@
+<!-- Реализуйте последний 2 слайда в презентации с помощью пройденого на уроке материала -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+</head>
+<script type="text/javascript">
+
+    // конструктор доктора
+    function Doctor (name,prof) {
+      this.prof = prof;
+      this.name = name;
+      this.walk = function(){document.write("Имя: " + this.name+ " идет <br/>");}
+      this.eat = function(){document.write(this.prof + " ест <br/>");}
+      this.drink = function(){document.write("Имя: " + this.name +" , имея профессию "+this.prof + " пьет <br/>");}
+    } 
+
+    Doctor.prototype.cure = function(){
+      document.write("<br>"+this.name + " лечит:");
+    }
+
+    // конструктор дантиста
+    function Dentist(name,prof){
+      Doctor.call(this, name,prof);
+    }
+    Dentist.prototype = Object.create(Doctor.prototype);
+    Dentist.prototype.cure = function(){
+      Doctor.prototype.cure.call(this);
+      document.write("зубы <br/>");
+    }
+ 
+    // конструктор хирурга
+    function Surgeon(name,prof){
+      Doctor.call(this, name,prof);
+    }
+    Surgeon.prototype = Object.create(Doctor.prototype);
+    Surgeon.prototype.cure = function(){
+     Doctor.prototype.cure.call(this);
+     document.write("почти все, а еще делает операции <br/>");
+    }
+
+
+var man = new Dentist("Петр Александрович","дантист");
+var wooman = new Surgeon("Ольга Владимировна","хирург");
+var doc = new Doctor("Оксана Леонидовна"," зав. отделением");
+
+man.walk();
+wooman.drink();
+doc.eat();
+man.cure();
+wooman.cure();
+doc.cure();
+</script>
+<body>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!-- Реализуйте последний 2 слайда в презентации с помощью пройденого на уроке материала -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+</head>
+<script type="text/javascript">
+ // конструктор человека
+ function Man (name,prof) {
+    this.prof = prof;
+    this.name = name;
+    this.walk = function(){document.write("Имя: " + this.name+ " идет <br/>");}
+    this.eat = function(){document.write(this.prof + " ест <br/>");}
+    this.drink = function(){document.write("Имя: " + this.name +" , имея профессию "+this.prof + " пьет <br/>");}
+    this.displayInfo = function(){
+        document.write("Професия: " + this.prof + "<br/>");
+    };
+ }
+ 
+// конструктор учителя
+function ClassMan(name,prof,kind){
+    Man.call(this, name,prof);
+    this.kind = kind;
+    this.Learn = function(){
+        document.write("Имя: " + this.name+","+" професия: " + this.prof+ ","+" предмет: " + this.kind + "<br/>");
+    };
+}
+ClassMan.prototype = Object.create(Man.prototype);
+ 
+// конструктор доктора
+function Doctor(name,prof){
+    Man.call(this, name,prof);
+    this.Cure = function(){
+        document.write("Имя: " + this.name+","+" професия: " + this.prof+ "<br/>");
+    };
+}
+Doctor.prototype = Object.create(Man.prototype);
+
+// конструктор солдата
+function Soldier(name,prof){
+    Man.call(this, name,prof);
+    this.Shoot = function(){
+        document.write("Профессия: " + this.prof+" и этим все сказано"+"<br/>");
+    };
+}
+Soldier.prototype = Object.create(Man.prototype);
+
+
+var man = new Man("Петя","безработный");
+var clman = new ClassMan("Владимир Петрович","учитель", "математика");
+var doc = new Doctor("Оксана Леонидовна"," профессор урологии");
+var sold = new Soldier("Петров","солдат");
+
+
+man.walk();
+clman.drink();
+man.displayInfo(); 
+clman.Learn(); 
+doc.eat();
+sold.Shoot();
+</script>
+<body>
+</body>
+</html>
